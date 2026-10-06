@@ -3,12 +3,12 @@ POST http://localhost:3000/ciclista
 Content-Type: application/json
 
 {
-    "nome": "Santiago",
-    "email": "santiagofidmay@gmail.com",
+    "nome": "Roberto",
+    "email": "roberto@gmail.com",
     "senha": "abc",
     "cpf": "123456789",
     "endereco": "rua abc, 5",
-    "celular": "47992884145"
+    "celular": "47912345678"
 }
 
 ### 2. Testar cadastro do ciclista
@@ -16,12 +16,12 @@ POST http://localhost:3000/ciclista
 Content-Type: application/json
 
 {
-    "nome": "Santiago",
-    "email": "santiagofidmay@gmail.com",
+    "nome": "Roberto",
+    "email": "roberto@gmail.com",
     "senha": "abc",
     "cpf": "12345678912",
     "endereco": "rua abc, 5",
-    "celular": "47992884145"
+    "celular": "47912345678"
 }
 
 ### 3. Testar cadastro do ciclista
@@ -29,12 +29,12 @@ POST http://localhost:3000/ciclista
 Content-Type: application/json
 
 {
-    "nome": "Sara",
-    "email": "sara@gmail.com",
+    "nome": "Marcos",
+    "email": "marcos@gmail.com",
     "senha": "abc",
     "cpf": "12345678912",
     "endereco": "rua abc, 5",
-    "celular": "47992884145"
+    "celular": "47912345678"
 }
 
 ### 4. Testar cadastro do ciclista
@@ -42,29 +42,15 @@ POST http://localhost:3000/ciclista
 Content-Type: application/json
 
 {
-    "nome": "ana",
+    "nome": "Ana",
     "email": "ana@gmail.com",
     "senha": "abc",
     "cpf": "12345678912",
     "endereco": "rua abc, 5",
-    "celular": "47992884145"
+    "celular": "47912345678"
 }
 
-### 5. Testar cadastro do ciclista
-POST http://localhost:3000/ciclista
-Content-Type: application/json
-
-{
-    "nome": "matheus",
-    "email": "matheus@gmail.com",
-    "senha": "abc",
-    "cpf": "12345678912",
-    "endereco": "rua abc, 5",
-    "celular": "47992884145"
-}
-
-
-### 6. FAzer Login do ciclista (Armazena o token automaticamente)
+### 5. Fazer Login do ciclista (Armazena o token automaticamente)
 # @name loginReq
 POST http://localhost:3000/login
 Content-Type: application/json
@@ -73,3 +59,11 @@ Content-Type: application/json
     "email": "ana@gmail.com",
     "senha": "abc"
 }
+
+### 6. Consultar ciclista por ID (rota privada)
+GET http://localhost:3000/ciclista/1
+Authorization: {{loginReq.response.body.token}}
+
+### 7. Consultar ciclista por nome (rota privada)
+GET http://localhost:3000/ciclista/buscarNome/Matheus
+Authorization: {{loginReq.response.body.token}}

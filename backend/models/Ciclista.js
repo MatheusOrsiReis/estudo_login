@@ -33,7 +33,7 @@ const Ciclista = db.define('ciclista',{
     },
     
     celular: {
-        type:DataTypes.NUMBER,
+        type:DataTypes.STRING(100),
         allowNull: false
     },
     },{
