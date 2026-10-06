@@ -28,8 +28,10 @@ app.post('/login', authController.login)
 app.use(authMiddleware)
 // ------- Rotas Privadas -------
 
+app.get('/ciclistas', ciclistaController.listar)
 app.get('/ciclista/buscarNome/:nome', ciclistaController.consultarNome)
 app.get('/ciclista/:id', ciclistaController.consultarID)
+app.delete('/ciclista/:id', ciclistaController.apagar)
 
 
 app.get('/', (req,res)=>{

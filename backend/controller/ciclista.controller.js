@@ -94,8 +94,51 @@ const consultarNome = async (req,res)=>{
     }
 }
 
-const apagar = async(req,res)=>{
-    const id = req.params.id
+const apagar = async (req,res)=>{
+     const id = req.params.id
+
+    try{
+        const ciclista = await Ciclista.findByPk(id)
+
+        if(!ciclista){
+            return res.status(404).json({message: "Ciclista não encontrado!"})
+        }
+
+        await Ciclista.destroy({ where: { codCiclista: id}})
+
+        return res.status(200).json({message: 'Ciclista excluído com sucesso!' })
+    }catch(err){
+        console.error('Erro ao apagar o ciclista!',err)
+        res.status(500),json({message: 'Erro ao apagar o ciclista!'})
+    }
 }
 
-module.exports = { cadastrar, consultarID, consultarNome }
+const listar = async (req,res)=>{
+    try{
+        const ciclistas = await Ciclista.findAll()
+        let resultado = []
+        let cpfDescriptografado = ''
+
+        ciclistas.forEach((el)=>{
+            const bytes = cryptoJs.AES.decrypt(el.cpf, CHAVE_SECRETA)
+            cpfDescriptografado = bytes.toString(cryptoJs.enc.Utf8)
+
+            resultado.push({
+                codigo_ciclista : el.codCiclista,
+                nome: el.nome,
+                email: el.email,
+                cpf: cpfDescriptografado,
+                endereco: el.endereco,
+                celular: el.celular
+            })
+        })
+
+        res.status(200).json(resultado)
+
+    }catch(err){
+        console.error('Erro ao listar o ciclista!',err)
+        res.status(500).json({message: 'Erro ao listar o ciclista!'})
+    }
+}
+
+module.exports = { cadastrar, consultarID, consultarNome, apagar, listar }

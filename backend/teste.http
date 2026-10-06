@@ -65,5 +65,13 @@ GET http://localhost:3000/ciclista/1
 Authorization: {{loginReq.response.body.token}}
 
 ### 7. Consultar ciclista por nome (rota privada)
-GET http://localhost:3000/ciclista/buscarNome/Matheus
+GET http://localhost:3000/ciclista/buscarNome/juan
+Authorization: {{loginReq.response.body.token}}
+
+### 8. Listar ciclista (rota privada)
+GET http://localhost:3000/ciclistas
+Authorization: {{loginReq.response.body.token}}
+
+### 8. Listar ciclista (rota privada)
+DELETE http://localhost:3000/ciclista/3
 Authorization: {{loginReq.response.body.token}}
